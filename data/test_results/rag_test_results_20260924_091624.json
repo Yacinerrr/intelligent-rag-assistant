@@ -1,0 +1,34 @@
+[
+  {
+    "question": "What is ESI?",
+    "answer": "ESI is listed as one of the partner institutions in the cooperation section (alongside USTHB, Université de Blida, Université de Sétif, etc.). Source: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:16:18"
+  },
+  {
+    "question": "What are the main projects mentioned in the documents?",
+    "answer": "- Finaliser la plateforme sécurisée de commerce électronique  \n- Développer une plateforme proactive pour la cyber‑sécurité  \n- Concevoir une architecture sécurisée pour la surveillance médicale pervasive  \n- Concevoir une architecture sécurisée pour une application d’apprentissage fédéré dans le domaine de la santé  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:16:19"
+  },
+  {
+    "question": "Which projects are currently frozen or stopped, and why?",
+    "answer": "- **Infrastructure Big Data** – Work on this infrastructure has not started because the responsible team (from another division) is unavailable.  \n- **Équipe des Dispositifs de Sécurité** – Activities of this team were interrupted due to a lack of resources (engineers, public IP addresses, etc.).  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:16:21"
+  },
+  {
+    "question": "What information is provided about the organization?",
+    "answer": "- **Name and affiliation** – Centre de Recherche sur l’Information Scientifique et Technique (CERIST), placed under the Ministère de l’Enseignement Supérieur et de la Recherche Scientifique.  \n- **Division** – Division Sécurité Informatique.  \n- **Report** – Bilan DSI 2025 (rapport des activités scientifiques de la division pour l’année 2025).  \n- **Scientific activities** – Participation à la journée ouverte d’Intelligence Artificielle à l’USTHB le 22 mai 2025; production de résultats en 2025 : une enquête « A Taxonomy of Smart City Architectures », un article de conférence « From Threat to Trust », etc.  \n- **Cooperation partners (2025)** – DGSN (formation à la carte), King Saud University – Center of Excellence in Information Assurance (CoEIA) avec le Prof. Derhab, Faculté d’Ingénierie et de l’Informatique – Université de Concordia (Canada) avec le Pr. Debbabi, Centre Insight for Data Analytics – Université de Dublin (Irlande) avec le Prof. Kechadi, University of Doha for Science and Technology (Qatar) avec le Pr. Challal Yacine, South Brittany University (France) avec Mawloud Omar, USTHB, ESI, Université de Blida, Université de Sétif, École Supérieure des Transmissions (Koléa, MDN).  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:16:24"
+  }
+]

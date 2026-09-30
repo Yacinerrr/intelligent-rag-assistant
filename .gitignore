@@ -1,33 +1,24 @@
-# Environment files and secrets
+# Secrets — never commit these
 .env
 .env.*
 !.env.example
 
-# Python environments and caches
-.venv/
-venv/
-env/
+# Python
 __pycache__/
-*.py[cod]
-*.egg-info/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
+*.pyc
+*.pyo
+venv/
+.venv/
 
-# Jupyter temporary files
-.ipynb_checkpoints/
-
-# Generated local vector stores and test exports
-data/chroma/
+# The vector database — rebuilds automatically from data/documents, no need to track it
 data/chroma_db/
-data/test_results/
+data/documents/
 
-# Local IDE and operating-system files
-.vscode/
-.idea/
+# OS clutter
 .DS_Store
 Thumbs.db
 
-# Logs and local output files
-*.log
-*.tmp
+# Editor folders
+.vscode/
+.idea/
+notebooks/

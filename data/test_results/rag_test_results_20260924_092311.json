@@ -1,0 +1,138 @@
+[
+  {
+    "question": "Qui est le chef de projet de la \"Plateforme proactive pour la cyber-sécurité basée sur l'IA et le Bigdata\" ?",
+    "answer": "Guemraoui Lila  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:16"
+  },
+  {
+    "question": "Quelle est la date de fin prévue du projet e-commerce sécurisé ?",
+    "answer": "Décembre 2025  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:18"
+  },
+  {
+    "question": "Combien de chercheurs compose le potentiel humain de la division en 2025 ?",
+    "answer": "15 chercheurs  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:20"
+  },
+  {
+    "question": "Combien de publications dans des journaux internationaux la division a-t-elle produites en 2025, et combien sont en cours de soumission ?",
+    "answer": "4 publications dans des journaux internationaux ; 7 sont en cours de soumission.  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:22"
+  },
+  {
+    "question": "Quel est le nombre total de thèses soutenues, en master, et en licence encadrées en 2025 ?",
+    "answer": "Doctorat : 9 ; Master : 10 ; Licence : 2  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:25"
+  },
+  {
+    "question": "Combien de prototypes et de logiciels ont été produits par la division en 2025 ?",
+    "answer": "Prototypes : 7 ; Logiciels : 1  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:19:45"
+  },
+  {
+    "question": "Quel est le pourcentage d'avancement du projet dont Boulemtafes Amine est le chef, et quelle est sa date de fin prévue ?",
+    "answer": "50 % ; Décembre 2026  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:20:01"
+  },
+  {
+    "question": "Zemmache Amina travaille sur quel projet, et quel article a-t-elle soumis en 2025 ?",
+    "answer": "Zemmache Amina travaille sur le projet **« Location Privacy in e‑health systems »**.  \nEn 2025, elle a soumis les articles suivants :  \n\n1. **« Physical‑layer location privacy mechanisms in Internet of things: A comprehensive survey »** (soumission papier journal, 2025).  \n2. **« Phishing Email Detection with LSTM, CNN, and Transformer Models: A Study on Robustness and Generalization »** (octobre 2025).  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:20:14"
+  },
+  {
+    "question": "Quels projets sont actuellement \"gelés\" ou \"à l'arrêt\", et pour quelle raison ?",
+    "answer": "- **Automatisation de l’analyse de la Sécurité d’un Bâtiment Intelligent (Smart Building Security Analysis Automation)** – gelé depuis 2022 faute de personnel technique disponible.  \n- **Infrastructure Big Data** – à l’arrêt car l’équipe responsable (d’une autre division) n’est pas disponible.  \n- **Dispositifs de Sécurité** (travaux de l’équipe des Dispositifs de Sécurité) – interrompus en raison d’un manque de ressources (ingénieurs, adresses IP publiques, etc.).  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:20:35"
+  },
+  {
+    "question": "Amira Abdelouahab participe à combien de projets différents, et quel est son pourcentage de participation dans chacun ?",
+    "answer": "Amira Abdelouahab participe à **2 projets différents** :\n\n1. **Architecture sécurisée pour une application d’apprentissage fédéré dans le domaine de la santé** – le bilan indique deux valeurs : 10 % de participation (premier état) et 50 % de participation (état plus récent).  \n2. **Architecture sécurisée pour la surveillance médicale pervasive basée sur le Deep Learning** – 50 % de participation.  \n\nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:20:57"
+  },
+  {
+    "question": "Quelles sont les deux thèses différentes associées au nom \"Amira\" dans ce document, et en quoi diffèrent-elles ?",
+    "answer": "I can only answer questions based on the provided knowledge base.",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:21:20"
+  },
+  {
+    "question": "Combien de recrutements ont eu lieu dans la division en 2025 ?",
+    "answer": "0 recrutement  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:21:41"
+  },
+  {
+    "question": "Quel est le budget total alloué à la division en 2025 ?",
+    "answer": "I can only answer questions based on the provided knowledge base.",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:21:57"
+  },
+  {
+    "question": "Quels sont les résultats du projet \"Bâtiment Intelligent\" en 2025 ?",
+    "answer": "I can only answer questions based on the provided knowledge base.",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:22:18"
+  },
+  {
+    "question": "Résume les principales difficultés rencontrées par la division en 2025.",
+    "answer": "Les principales difficultés rencontrées par la division en 2025 se résument à un manque de personnel technique, ce qui a limité le recrutement, entraîné des projets gelés ou à l’arrêt et freiné le développement de nouvelles initiatives.  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:22:33"
+  },
+  {
+    "question": "Quels sont les projets prévus ou envisagés pour 2027 ?",
+    "answer": "Le seul projet prévu pour 2027 est : **un nouveau projet de paiement mobile sécurisé**.  \nSource: Bilan2025_dsi.pdf",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:22:53"
+  },
+  {
+    "question": "Quelles sont les partenariats internationaux de la division, et avec quels pays ?",
+    "answer": "I can only answer questions based on the provided knowledge base.",
+    "sources": [
+      "Bilan2025_dsi.pdf"
+    ],
+    "recorded_at": "2026-09-24T09:23:11"
+  }
+]

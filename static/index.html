@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CERIST AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: "#0F1218",
+          surface: "#171B24",
+          surfaceRaised: "#1D2230",
+          sidebar: "#12151C",
+          borderc: "rgba(255,255,255,0.08)",
+          text: "#E8E6DE",
+          textDim: "#9298A6",
+          accent: "#4FA695",
+          accentSoft: "rgba(79,166,149,0.14)",
+          userBubble: "#232A3D",
+          errorc: "#C97064",
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', "Georgia", "serif"],
+          sans: ['"IBM Plex Sans"', "-apple-system", "sans-serif"],
+          mono: ['"IBM Plex Mono"', "monospace"],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .row-anim { animation: rise 0.28s ease-out; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-4px); opacity: 1; } }
+  .typing-dot { animation: bounce 1.1s infinite ease-in-out; }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+  .messages::-webkit-scrollbar, .sidebar-list::-webkit-scrollbar { width: 8px; }
+  .messages::-webkit-scrollbar-thumb, .sidebar-list::-webkit-scrollbar-thumb { background: #1D2230; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) { .row-anim, .typing-dot { animation: none !important; } }
+  @media (max-width: 768px) {
+    .sidebar { position: fixed; z-index: 20; height: 100vh; transform: translateX(-100%); transition: transform 0.2s ease; }
+    .sidebar.open { transform: translateX(0); }
+  }
+</style>
+</head>
+<body class="h-full m-0 bg-bg text-text font-sans">
+  <div class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar w-64 shrink-0 bg-sidebar border-r border-borderc flex flex-col">
+      <div class="flex items-center gap-2.5 px-4 pt-6 pb-5">
+        <div class="w-8 h-8 rounded-lg bg-accent text-bg flex items-center justify-center font-serif font-semibold text-base shrink-0">C</div>
+        <div class="leading-tight">
+          <div class="font-serif font-semibold text-[15px]">CERIST AI</div>
+          <div class="text-[11px] text-textDim">Document assistant</div>
+        </div>
+      </div>
+
+      <div class="px-3 pb-3">
+        <button id="newConvBtn" type="button"
+          class="w-full flex items-center gap-2 text-sm bg-surface hover:bg-surfaceRaised border border-borderc rounded-lg px-3 py-2.5 transition-colors">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2V14M2 8H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          New conversation
+        </button>
+      </div>
+
+      <div class="px-3 pb-2 text-[11px] uppercase tracking-wide text-textDim">History</div>
+      <div id="convList" class="sidebar-list flex-1 overflow-y-auto px-2 pb-4 flex flex-col gap-0.5"></div>
+      <div class="px-3 py-3 border-t border-borderc">
+        <button id="signOutBtn" type="button" class="w-full text-left text-xs text-textDim hover:text-text px-3 py-2 rounded-lg hover:bg-surface transition-colors">
+          Sign out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="flex items-center justify-between px-5 pt-6 pb-4 border-b border-borderc">
+        <div class="flex items-center gap-3">
+          <button id="sidebarToggle" class="md:hidden text-textDim" aria-label="Toggle history">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 6H17M3 10H17M3 14H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <h1 id="convTitle" class="font-serif font-semibold text-lg truncate max-w-xs">New conversation</h1>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-textDim shrink-0">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>Connected
+        </div>
+      </header>
+
+      <div id="messages" class="messages flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-4">
+        <div id="emptyState" class="m-auto text-center text-textDim max-w-sm">
+          <div class="font-serif text-4xl text-accent mb-2">§</div>
+          <p class="text-sm leading-relaxed">Ask a question about the documents in the knowledge base. Answers come only from the indexed source material.</p>
+        </div>
+      </div>
+
+      <form id="chatForm" class="flex gap-2.5 px-5 pt-4 pb-6 border-t border-borderc">
+        <div class="flex-1 flex items-center bg-surface border border-borderc rounded-full pl-4 pr-1.5 focus-within:border-accent transition-colors">
+          <input type="text" id="questionInput" placeholder="Ask a question…" autocomplete="off"
+            class="flex-1 bg-transparent border-none outline-none text-text placeholder-textDim text-sm py-2.5" />
+        </div>
+        <button type="submit" id="sendBtn" aria-label="Send"
+          class="w-9 h-9 rounded-full bg-accent text-bg flex items-center justify-center shrink-0 hover:scale-105 disabled:opacity-35 disabled:hover:scale-100 transition-transform">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+<script>
+  const API_BASE = "/api";
+  const messagesEl = document.getElementById("messages");
+  const emptyStateEl = document.getElementById("emptyState");
+  const formEl = document.getElementById("chatForm");
+  const inputEl = document.getElementById("questionInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const newConvBtn = document.getElementById("newConvBtn");
+  const convListEl = document.getElementById("convList");
+  const convTitleEl = document.getElementById("convTitle");
+  const sidebarEl = document.getElementById("sidebar");
+  const sidebarToggle = document.getElementById("sidebarToggle");
+
+  let sessionId = localStorage.getItem("rag_session_id") || null;
+
+  function clearMessages() {
+    messagesEl.innerHTML = "";
+    const div = document.createElement("div");
+    div.id = "emptyState";
+    div.className = "m-auto text-center text-textDim max-w-sm";
+    div.innerHTML = '<div class="font-serif text-4xl text-accent mb-2">§</div><p class="text-sm leading-relaxed">Ask a question about the documents in the knowledge base. Answers come only from the indexed source material.</p>';
+    messagesEl.appendChild(div);
+  }
+
+  function addRow(role, content, sources, isError) {
+    const empty = document.getElementById("emptyState");
+    if (empty) empty.remove();
+
+    const isUser = role === "user";
+    const row = document.createElement("div");
+    row.className = "flex row-anim " + (isUser ? "justify-end" : "justify-start");
+
+    const bubble = document.createElement("div");
+    bubble.className = [
+      "max-w-[82%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap",
+      isUser ? "bg-userBubble rounded-br-sm" : "bg-surface border border-borderc rounded-bl-sm " + (isError ? "border-errorc/40 text-errorc" : ""),
+    ].join(" ");
+    bubble.textContent = content;
+    row.appendChild(bubble);
+
+    if (sources && sources.length) {
+      const wrap = document.createElement("div");
+      wrap.className = "flex flex-wrap gap-1.5 mt-2.5";
+      sources.forEach(function (s) {
+        const pill = document.createElement("span");
+        pill.className = "font-mono text-[11px] text-accent bg-accentSoft border border-accent/25 rounded-full px-2.5 py-0.5";
+        pill.textContent = s;
+        wrap.appendChild(pill);
+      });
+      bubble.appendChild(wrap);
+    }
+
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addTyping() {
+    const row = document.createElement("div");
+    row.className = "flex justify-start row-anim";
+    row.id = "typingRow";
+    row.innerHTML =
+      '<div class="bg-surface border border-borderc rounded-2xl rounded-bl-sm px-4 py-3.5 flex gap-1">' +
+      '<span class="typing-dot w-1.5 h-1.5 rounded-full bg-textDim"></span>' +
+      '<span class="typing-dot w-1.5 h-1.5 rounded-full bg-textDim"></span>' +
+      '<span class="typing-dot w-1.5 h-1.5 rounded-full bg-textDim"></span></div>';
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function removeTyping() {
+    const row = document.getElementById("typingRow");
+    if (row) row.remove();
+  }
+
+  async function loadConversationList() {
+    const res = await fetch(API_BASE + "/conversations");
+    const convs = await res.json();
+    convListEl.innerHTML = "";
+    convs.forEach(function (c) {
+      const btn = document.createElement("button");
+      const active = c.id === sessionId;
+      btn.type = "button";
+      btn.className = "text-left text-sm truncate px-3 py-2 rounded-lg transition-colors " +
+        (active ? "bg-surfaceRaised text-text" : "text-textDim hover:bg-surface hover:text-text");
+      btn.textContent = c.title;
+      btn.addEventListener("click", function () { openConversation(c.id); });
+      convListEl.appendChild(btn);
+    });
+  }
+
+  async function openConversation(id) {
+    sessionId = id;
+    localStorage.setItem("rag_session_id", id);
+    const res = await fetch(API_BASE + "/conversations/" + id);
+    if (res.status === 401) { window.location.href = "/login"; return; }
+    if (!res.ok) { await startNewConversation(); return; }
+    const conv = await res.json();
+    convTitleEl.textContent = conv.title;
+    clearMessages();
+    conv.messages.forEach(function (m) { addRow(m.role, m.content, m.sources); });
+    sidebarEl.classList.remove("open");
+    loadConversationList();
+  }
+
+  async function startNewConversation() {
+    const res = await fetch(API_BASE + "/conversations", { method: "POST" });
+    const conv = await res.json();
+    sessionId = conv.id;
+    localStorage.setItem("rag_session_id", conv.id);
+    convTitleEl.textContent = conv.title;
+    clearMessages();
+    sidebarEl.classList.remove("open");
+    loadConversationList();
+  }
+
+  async function sendQuestion(question) {
+    addRow("user", question);
+    addTyping();
+    sendBtn.disabled = true;
+
+    try {
+      const res = await fetch(API_BASE + "/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: question, session_id: sessionId }),
+      });
+      if (res.status === 401) { window.location.href = "/login"; return; }
+      if (!res.ok) throw new Error("Server responded " + res.status);
+
+      const data = await res.json();
+      sessionId = data.session_id;
+      localStorage.setItem("rag_session_id", sessionId);
+      convTitleEl.textContent = data.title;
+      removeTyping();
+      addRow("assistant", data.answer, data.sources);
+      loadConversationList();
+    } catch (err) {
+      removeTyping();
+      addRow("assistant", "Could not reach the assistant. Check that the server is running, then try again.", null, true);
+      console.error(err);
+    } finally {
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+  }
+
+  formEl.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const question = inputEl.value.trim();
+    if (!question) return;
+    inputEl.value = "";
+    sendQuestion(question);
+  });
+
+  newConvBtn.addEventListener("click", startNewConversation);
+  document.getElementById("signOutBtn").addEventListener("click", async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "/login";
+  });
+  sidebarToggle.addEventListener("click", function () { sidebarEl.classList.toggle("open"); });
+
+  (async function init() {
+    if (sessionId) {
+      await openConversation(sessionId);
+    } else {
+      await startNewConversation();
+    }
+    inputEl.focus();
+  })();
+</script>
+</body>
+</html>

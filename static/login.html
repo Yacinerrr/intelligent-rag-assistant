@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Sign in to the CERIST AI platform">
+<title>Sign in — CERIST AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: "#0F1218", surface: "#171B24", borderc: "rgba(255,255,255,0.08)",
+          text: "#E8E6DE", textDim: "#9298A6", accent: "#4FA695",
+          accentSoft: "rgba(79,166,149,0.14)", errorc: "#C97064",
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', "Georgia", "serif"],
+          sans: ['"IBM Plex Sans"', "-apple-system", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .card-anim { animation: rise 0.35s ease-out; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .shake { animation: shake 0.3s ease-in-out; }
+</style>
+</head>
+<body class="h-screen m-0 bg-bg text-text font-sans flex items-center justify-center px-4">
+
+  <div class="card-anim w-full max-w-sm">
+    <div class="flex flex-col items-center mb-8">
+      <div class="w-12 h-12 rounded-xl bg-accent text-bg flex items-center justify-center font-serif font-semibold text-2xl mb-4">C</div>
+      <h1 class="font-serif font-semibold text-2xl">CERIST AI</h1>
+      <p class="text-textDim text-sm mt-1 text-center">Restricted access — Division Sécurité Informatique</p>
+    </div>
+
+    <form id="loginForm" class="bg-surface border border-borderc rounded-2xl p-6 flex flex-col gap-4">
+      <div>
+        <label for="password" class="block text-xs text-textDim mb-1.5">Access password</label>
+        <div class="flex items-center border border-borderc rounded-lg px-3 focus-within:border-accent transition-colors">
+          <input type="password" id="password" required autocomplete="current-password"
+            class="flex-1 bg-transparent border-none outline-none text-text text-sm py-2.5" placeholder="••••••••" />
+          <button type="button" id="toggleVis" class="text-textDim hover:text-text px-1" aria-label="Show password">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8s2.5-4.5 7-4.5S15 8 15 8s-2.5 4.5-7 4.5S1 8 1 8Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <p id="errorMsg" class="text-errorc text-xs hidden"></p>
+
+      <button type="submit" id="submitBtn"
+        class="bg-accent text-bg text-sm font-medium rounded-lg py-2.5 hover:opacity-90 disabled:opacity-50 transition-opacity">
+        Sign in
+      </button>
+    </form>
+
+    <p class="text-center text-textDim text-xs mt-5">Internal tool — CERIST document assistant</p>
+  </div>
+
+<script>
+  const form = document.getElementById("loginForm");
+  const passwordInput = document.getElementById("password");
+  const errorMsg = document.getElementById("errorMsg");
+  const submitBtn = document.getElementById("submitBtn");
+  const toggleVis = document.getElementById("toggleVis");
+  const card = document.querySelector(".card-anim");
+
+  toggleVis.addEventListener("click", () => {
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorMsg.classList.add("hidden");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Signing in…";
+
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: passwordInput.value }),
+      });
+
+      if (res.ok) {
+        window.location.href = "/";
+        return;
+      }
+
+      errorMsg.textContent = "Incorrect password. Try again.";
+      errorMsg.classList.remove("hidden");
+      card.classList.add("shake");
+      setTimeout(() => card.classList.remove("shake"), 300);
+    } catch (err) {
+      errorMsg.textContent = "Could not reach the server. Try again.";
+      errorMsg.classList.remove("hidden");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Sign in";
+    }
+  });
+
+  passwordInput.focus();
+</script>
+</body>
+</html>
